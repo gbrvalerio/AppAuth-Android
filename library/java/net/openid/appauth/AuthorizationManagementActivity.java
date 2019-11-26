@@ -315,7 +315,9 @@ public class AuthorizationManagementActivity extends Activity {
     }
 
     private Intent extractResponseData(Uri responseUri) {
+        Logger.info('uriiiig' + responseUri.toString());
         if (responseUri.getQueryParameterNames().contains(AuthorizationException.PARAM_ERROR)) {
+            Logger.info('uriiiig falha1' + responseUri.toString());
             return AuthorizationException.fromOAuthRedirect(responseUri).toIntent();
         } else {
             AuthorizationResponse response = new AuthorizationResponse.Builder(mAuthRequest)
@@ -329,10 +331,10 @@ public class AuthorizationManagementActivity extends Activity {
                         + "from request (%s) - discarding response",
                         response.state,
                         mAuthRequest.state);
-
+                Logger.info('uriiiig falha2' + responseUri.toString());
                 return AuthorizationRequestErrors.STATE_MISMATCH.toIntent();
             }
-
+            Logger.info('uriiiig tointent' + responseUri.toString());
             return response.toIntent();
         }
     }
